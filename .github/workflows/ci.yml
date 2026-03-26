@@ -19,7 +19,7 @@ jobs:
       - name: Check Python version
         run: | 
           python_version=$(python --version)
-          correct_version="Python 3.13"
+          correct_version="Python 3.11.15"
           if [[ ${python_version} != ${correct_version} ]]; then
               echo "Python version is not 3.11.15"
               exit 1
