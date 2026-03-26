@@ -9,13 +9,12 @@
 #   Integration tests use the REAL modules — so a bug in inventory
 #   will now surface here even if orders.py itself is fine.
 
-import pytest
 import inventory
 import notifications
 import orders
 
 
-# ── Shared setup/teardown ─────────────────────────────────────────────────────
+# ── Shared setup/teardown ────────────────────────────────────────────────────
 # Reset BOTH modules before every test so they don't bleed into each other.
 
 def setup_function():
@@ -23,7 +22,7 @@ def setup_function():
     notifications.clear()
 
 
-# ── orders ↔ inventory ────────────────────────────────────────────────────────
+# ── orders ↔ inventory ───────────────────────────────────────────────────────
 
 class TestOrdersInventoryIntegration:
 
@@ -62,7 +61,7 @@ class TestOrdersInventoryIntegration:
         assert inventory.get_stock("laptop") == 0
 
 
-# ── orders ↔ notifications ────────────────────────────────────────────────────
+# ── orders ↔ notifications ───────────────────────────────────────────────────
 
 class TestOrdersNotificationsIntegration:
 
@@ -99,7 +98,7 @@ class TestOrdersNotificationsIntegration:
         assert sent[0]["email"] != sent[1]["email"]
 
 
-# ── Full end-to-end flow ──────────────────────────────────────────────────────
+# ── Full end-to-end flow ─────────────────────────────────────────────────────
 
 class TestFullOrderFlow:
 

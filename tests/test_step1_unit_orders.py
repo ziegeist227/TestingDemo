@@ -8,12 +8,11 @@
 # module with a controlled fake (a "mock") for the duration of
 # one test.  When the test finishes, the real module is restored.
 
-import pytest
 from unittest.mock import patch, MagicMock
 import orders
 
 
-# ── Helper: a factory for a fake inventory.get_stock / reduce_stock ───────────
+# ── Helper: a factory for a fake inventory.get_stock / reduce_stock ──────────
 
 def _mock_inventory(stock_value=10, reduce_returns=True):
     """
@@ -26,7 +25,7 @@ def _mock_inventory(stock_value=10, reduce_returns=True):
     return mock_get, mock_reduce
 
 
-# ── Input validation tests ────────────────────────────────────────────────────
+# ── Input validation tests ───────────────────────────────────────────────────
 
 class TestPlaceOrderValidation:
 
@@ -47,7 +46,7 @@ class TestPlaceOrderValidation:
         assert result.success is False
 
 
-# ── Business logic tests (inventory mocked) ───────────────────────────────────
+# ── Business logic tests (inventory mocked) ──────────────────────────────────
 
 class TestPlaceOrderLogic:
 
@@ -85,7 +84,11 @@ class TestPlaceOrderLogic:
 
     @patch("orders.inventory")
     @patch("orders.notifications")
-    def test_successful_order_calls_send_confirmation(self, mock_notif, mock_inv):
+    def test_successful_order_calls_send_confirmation(
+            self,
+            mock_notif,
+            mock_inv
+            ):
         mock_inv.get_stock.return_value = 10
         mock_inv.reduce_stock.return_value = True
         result = orders.place_order("alice@example.com", "laptop", 3)
@@ -98,7 +101,11 @@ class TestPlaceOrderLogic:
 
     @patch("orders.inventory")
     @patch("orders.notifications")
-    def test_failed_order_does_not_send_notification(self, mock_notif, mock_inv):
+    def test_failed_order_does_not_send_notification(
+            self,
+            mock_notif,
+            mock_inv
+            ):
         mock_inv.get_stock.return_value = 0   # nothing in stock
         orders.place_order("alice@example.com", "laptop", 1)
         mock_notif.send_confirmation.assert_not_called()

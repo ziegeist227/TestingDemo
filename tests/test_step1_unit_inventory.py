@@ -11,7 +11,7 @@ import pytest
 import inventory
 
 
-# ── Shared setup ──────────────────────────────────────────────────────────────
+# ── Shared setup ─────────────────────────────────────────────────────────────
 # Before each test, reset stock to known defaults so tests don't
 # affect each other.  pytest calls setup_function() automatically.
 
@@ -19,7 +19,7 @@ def setup_function():
     inventory.reset_stock()
 
 
-# ── get_stock() ───────────────────────────────────────────────────────────────
+# ── get_stock() ──────────────────────────────────────────────────────────────
 
 class TestGetStock:
 
@@ -43,7 +43,7 @@ class TestGetStock:
         assert result == 25
 
 
-# ── reduce_stock() ────────────────────────────────────────────────────────────
+# ── reduce_stock() ───────────────────────────────────────────────────────────
 
 class TestReduceStock:
 

@@ -18,14 +18,13 @@
 #    - Tests represent realistic user scenarios (happy path, sad paths).
 #    - We are not deliberately breaking internal interfaces here.
 
-import pytest
 import cart
 import inventory
 import notifications
 import checkout
 
 
-# ── Shared setup ──────────────────────────────────────────────────────────────
+# ── Shared setup ─────────────────────────────────────────────────────────────
 # Reset ALL state before every test; feature tests touch the whole system.
 
 def setup_function():
@@ -144,7 +143,7 @@ class TestCheckoutPartialFailure:
 
     def test_out_of_stock_item_causes_partial_failure(self):
         """
-        PRECONDITION : Cart has laptop×1 (in stock) and hoverboard×1 (not stocked).
+        PRECONDITION : Cart has laptop×1 and hoverboard×1 (not in stock).
         ACTION       : Customer checks out.
         POSTCONDITION: Checkout returns partial failure.
                        Laptop order succeeds, hoverboard order fails.
@@ -187,7 +186,7 @@ class TestCheckoutPartialFailure:
         """
         PRECONDITION : Cart requests 999 laptops, only 10 available.
         ACTION       : Checkout attempted.
-        POSTCONDITION: That item fails; failure message mentions the quantity issue.
+        POSTCONDITION: Item fails; failure message mentions the quantity issue.
         """
         cart.add_to_cart("heidi@example.com", "laptop", 999)
 
