@@ -26,7 +26,7 @@ def reduce_stock(item_id: str, quantity: int) -> bool:
     if current < quantity:
         return False
     _stock[item_id] = current - quantity
-    return True
+    return _stock[item_id]
 
 
 def reset_stock():
