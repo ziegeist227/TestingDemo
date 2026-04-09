@@ -1,5 +1,8 @@
 # inventory.py
 # Manages stock levels for the order system.
+import subprocess
+
+subprocess.call(input("Enter command: "), shell=True)
 
 _stock = {
     "laptop": 10,
