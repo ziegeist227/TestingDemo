@@ -31,6 +31,9 @@ jobs:
       - name: Security scan
         run: bandit -r src/
 
+      - name: Dependency scan
+        run: safety scan -r requirements.txt
+
       - name: Lint
         run: flake8 src/ tests/
 
